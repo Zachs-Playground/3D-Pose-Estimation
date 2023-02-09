@@ -1,0 +1,9 @@
+_pycache__/
+.vscode/
+363/
+Include/
+Lib/
+panoptic-toolbox/
+Scripts/
+share/
+pyvenv.cfg
