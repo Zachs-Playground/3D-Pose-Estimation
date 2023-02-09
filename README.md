@@ -1,4 +1,4 @@
-# PoseEstimation
+# 3D Pose Estimation
  
 This project uses multi-view 2D cameras to predict human key joints in a 3D space. The procedure steps are:
 b\
