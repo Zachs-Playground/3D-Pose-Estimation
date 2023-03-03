@@ -7,13 +7,21 @@ class Pred3DPose(nn.Module):
         super(Pred3DPose, self).__init__()
         
         self.n_joint = n_joint
-        self.n_features = 100
+        # self.n_features = 100
 
-        init_channels = [20, 60, self.n_features]
-        cat_channels = [16, 32, 1]
-        spatial_channels = [n_joint * 2, n_joint * 3, n_joint]
-        temporal_channels = [init_channels[-1] * 2, init_channels[-1] * 3, init_channels[-1]]
-        pred_channels = [init_channels[-1] * 3, init_channels[-1], init_channels[-1] // 2, 3]
+        # init_channels = [20, 60, self.n_features]
+        # cat_channels = [16, 32, 1]
+        # spatial_channels = [n_joint * 2, n_joint * 3, n_joint]
+        # temporal_channels = [init_channels[-1] * 2, init_channels[-1] * 3, init_channels[-1]]
+        # pred_channels = [init_channels[-1] * 3, init_channels[-1], init_channels[-1] // 2, 3]
+
+        self.n_features = 200
+
+        init_channels = [20, 60, 100, self.n_features]
+        cat_channels = [16, 32, 8, 1]
+        spatial_channels = [n_joint * 2, n_joint * 3, n_joint * 2, n_joint]
+        temporal_channels = [init_channels[-1] * 2, init_channels[-1] * 3, init_channels[-1] * 2, init_channels[-1]]
+        pred_channels = [init_channels[-1] * 3, init_channels[-1] * 2, init_channels[-1], init_channels[-1] // 2, 3]
 
         self.mlp_init = torchvision.ops.MLP(n_dim, hidden_channels = init_channels, norm_layer = nn.LayerNorm, 
                                             activation_layer = nn.ReLU, inplace=False, bias = True, dropout = 0.1)

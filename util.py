@@ -19,17 +19,17 @@ def prepare_inputs(annots_2d, cam_params):
   return inputs
 
 
-def calculate_loss(pred_2d, gt_2d, loss_func):
-  for cam_idx, cam in enumerate(gt_2d):
-    for frame_idx, frame in enumerate(cam):
-      for joint_idx, joint in enumerate(frame):
-        # check if the joint is detected or not, and check the confidence.
-        if joint[0] == 0.0 or joint[1] == 0.0:
-          gt_2d[cam_idx][frame_idx][joint_idx] = torch.zeros(2, dtype=torch.float32)
-          pred_2d[cam_idx][frame_idx][joint_idx] = torch.zeros(2, dtype=torch.float32)
+# def calculate_loss(pred_2d, gt_2d, loss_func):
+#   for cam_idx, cam in enumerate(gt_2d):
+#     for frame_idx, frame in enumerate(cam):
+#       for joint_idx, joint in enumerate(frame):
+#         # check if the joint is detected or not, and check the confidence.
+#         if joint[0] == 0.0 or joint[1] == 0.0:
+#           gt_2d[cam_idx][frame_idx][joint_idx] = torch.zeros(2, dtype=torch.float32)
+#           pred_2d[cam_idx][frame_idx][joint_idx] = torch.zeros(2, dtype=torch.float32)
   
-  loss = loss_func(pred_2d, gt_2d)
-  return loss
+#   loss = loss_func(pred_2d, gt_2d)
+#   return loss
 
 
 # def project_3d_to_2d(pred_3d_torch, cam_params_list):

@@ -8,5 +8,6 @@ Scripts/
 share/
 pyvenv.cfg
 checkpoint/
+checkpoint_m/
 .gitattributes
 .gitignore
