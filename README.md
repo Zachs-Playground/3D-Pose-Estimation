@@ -11,4 +11,4 @@ This project uses multi-view 2D cameras to predict human key joints in a 3D spac
 
 ### Model Architecture
 <br />
-<img src="./imgs/model.jpg" width="100" height="100" />
+<img src="./imgs/model.jpg" />
