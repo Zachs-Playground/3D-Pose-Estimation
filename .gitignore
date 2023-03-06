@@ -7,7 +7,7 @@ panoptic-toolbox/
 Scripts/
 share/
 pyvenv.cfg
-checkpoint/
-checkpoint_m/
+checkpoint_L1/
+checkpoint_L2/
 .gitattributes
 .gitignore

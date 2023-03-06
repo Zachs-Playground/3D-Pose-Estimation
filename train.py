@@ -12,10 +12,10 @@ from util import prepare_inputs
 from model import Pred3DPose
 
 cuda = True
-load_pretrained = True
+load_pretrained = False
 device = torch.device("cuda" if torch.cuda.is_available() and cuda == True else "cpu")
 print("The coda is running on: ", device)
-epoch = 500
+epoch = 200
 batch_size = 31
 frame_sequence = 5
 if frame_sequence % 2 == 0:
@@ -51,14 +51,15 @@ with open(annot_2d_path, "r") as annot2df:
 
 model = Pred3DPose().to(device)
 model.train()
-criterion = nn.MSELoss()
+# criterion = nn.MSELoss()
+criterion = nn.L1Loss()
 
 if load_pretrained:
-  checkpoint = torch.load("./checkpoint/epoch94.pt")
+  checkpoint = torch.load("./checkpoint/epoch119.pt")
   model.load_state_dict(checkpoint['model_state_dict'])
   print("Loaded Checkpoint")
 
-optimizer = optim.Adam(model.parameters(), lr=0.0005)
+optimizer = optim.Adam(model.parameters(), lr=0.001)
 if load_pretrained:
     optimizer.load_state_dict(checkpoint['optimizer_state_dict'])
 
@@ -105,6 +106,7 @@ for i in range(epoch):
           
           # loss = calculate_loss(pred_2d, pred_3d, batch_gt_2d, batch_gt_3d, loss_func=criterion)
           # loss = calculate_loss(pred_2d, batch_gt_2d, loss_func=criterion)
+
           loss = criterion(pred_3d, batch_gt_3d)
           avg_loss_per_epoch += loss
           count += 1
@@ -120,4 +122,4 @@ for i in range(epoch):
       'model_state_dict': model.state_dict(),
       'optimizer_state_dict': optimizer.state_dict(),
       'loss': loss,
-    }, f"./checkpoint/epoch{i}.pt")
+    }, f"./checkpoint_L1/epoch{i}.pt")
