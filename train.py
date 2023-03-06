@@ -12,10 +12,10 @@ from util import prepare_inputs
 from model import Pred3DPose
 
 cuda = True
-load_pretrained = False
+load_pretrained = True
 device = torch.device("cuda" if torch.cuda.is_available() and cuda == True else "cpu")
 print("The coda is running on: ", device)
-epoch = 200
+epoch = 300
 batch_size = 31
 frame_sequence = 5
 if frame_sequence % 2 == 0:
@@ -55,7 +55,7 @@ model.train()
 criterion = nn.L1Loss()
 
 if load_pretrained:
-  checkpoint = torch.load("./checkpoint/epoch119.pt")
+  checkpoint = torch.load("./checkpoint_L1/epoch199.pt")
   model.load_state_dict(checkpoint['model_state_dict'])
   print("Loaded Checkpoint")
 
