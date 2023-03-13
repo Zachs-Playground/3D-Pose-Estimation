@@ -8,14 +8,14 @@ class Pred3DPose(nn.Module):
         
         self.n_joint = n_joint
         self.span = sequence // 2
-        # self.n_features = 100
-
-        # init_channels = [20, 60, self.n_features]
-        # cat_channels = [16, 32, 1]
-        # spatial_channels = [n_joint * 2, n_joint * 3, n_joint]
-        # temporal_channels = [init_channels[-1] * 2, init_channels[-1] * 3, init_channels[-1]]
-        # spatial_channels_2 = [(sequence - self.span) * n_joint * 2, (sequence - self.span) * n_joint * 3, (sequence - self.span) * n_joint]
-        # pred_channels = [init_channels[-1] * 3, init_channels[-1], init_channels[-1] // 2, 3]
+        
+        self.n_features = 100
+        init_channels = [20, 60, self.n_features]
+        cat_channels = [16, 32, 1]
+        spatial_channels = [n_joint * 2, n_joint * 3, n_joint]
+        temporal_channels = [init_channels[-1] * 2, init_channels[-1] * 3, init_channels[-1]]
+        spatial_channels_2 = [(sequence - self.span) * n_joint * 2, (sequence - self.span) * n_joint * 3, (sequence - self.span) * n_joint]
+        pred_channels = [init_channels[-1] * 3, init_channels[-1], init_channels[-1] // 2, 3]
 
         # self.n_features = 200
         # init_channels = [20, 60, 100, self.n_features]
@@ -25,13 +25,13 @@ class Pred3DPose(nn.Module):
         # spatial_channels_2 = [(sequence - self.span) * n_joint * 2, (sequence - self.span) * n_joint * 3, (sequence - self.span) * n_joint, (sequence - self.span) * n_joint]
         # pred_channels = [init_channels[-1] * 3, init_channels[-1], init_channels[-1], init_channels[-1] // 2, 3]
 
-        self.n_features = 50
-        init_channels = [20, self.n_features]
-        cat_channels = [16, 1]
-        spatial_channels = [n_joint * 2, n_joint]
-        temporal_channels = [init_channels[-1] * 2, init_channels[-1]]
-        spatial_channels_2 = [(sequence - self.span) * n_joint * 2, (sequence - self.span) * n_joint]
-        pred_channels = [init_channels[-1] * 2, init_channels[-1] // 2, 3]
+        # self.n_features = 50
+        # init_channels = [20, self.n_features]
+        # cat_channels = [16, 1]
+        # spatial_channels = [n_joint * 2, n_joint]
+        # temporal_channels = [init_channels[-1] * 2, init_channels[-1]]
+        # spatial_channels_2 = [(sequence - self.span) * n_joint * 2, (sequence - self.span) * n_joint]
+        # pred_channels = [init_channels[-1] * 2, init_channels[-1] // 2, 3]
 
 
         self.mlp_init = torchvision.ops.MLP(n_dim, hidden_channels = init_channels, norm_layer = nn.LayerNorm, 

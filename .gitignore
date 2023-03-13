@@ -9,5 +9,6 @@ share/
 pyvenv.cfg
 checkpoint_L1/
 checkpoint_L2/
+checkpoint_panoptic_L1/
 .gitattributes
 .gitignore

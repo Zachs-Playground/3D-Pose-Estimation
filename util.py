@@ -18,6 +18,19 @@ def prepare_inputs(annots_2d, cam_params):
       
   return inputs
 
+def get_mpjpe(pred_3d, gt_3d):
+  n_frames, n_joints, xyz = pred_3d.size()
+  err = torch.sqrt(torch.sum(((pred_3d) - (gt_3d))**2))
+  sub_count = n_frames * n_joints
+  return err, sub_count
+
+
+def get_mpjpe_fitness3d(pred_3d, gt_3d):
+  n_frames, n_joints, xyz = pred_3d.size()
+  err = torch.sqrt(torch.sum(((pred_3d / 100.0) - (gt_3d / 100.0))**2))
+  sub_count = n_frames * n_joints
+  return err, sub_count
+
 
 # def calculate_loss(pred_2d, gt_2d, loss_func):
 #   for cam_idx, cam in enumerate(gt_2d):
